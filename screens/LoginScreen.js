@@ -35,7 +35,7 @@ export function LoginScreen({navigation}) {
           style={styles.buttonLogin}
           title={'Login'}
           onPress={() => {
-            navigation.navigate('HomeStack');
+            navigation.navigate('HomeStack', {screen: 'Establishment'});
           }}
         />
         <FilledButton
