@@ -1,12 +1,14 @@
 import React from 'react';
-import {StyleSheet, View, Image} from 'react-native';
+import {StyleSheet, View, Image, ScrollView} from 'react-native';
 import {Input} from '../components/Input';
 import {FilledButton} from '../components/FilledButton';
 import {Error} from '../components/Error';
+import {Header} from '../components/Header';
 
-export function RegisterScreen() {
+export function RegisterScreen({navigation}) {
   return (
     <View style={styles.container}>
+      <Header />
       <View style={styles.logoContainer}>
         <Image style={styles.logo} source={require('../images/logo2.png')} />
       </View>
@@ -30,7 +32,7 @@ export function RegisterScreen() {
           style={styles.buttonLogin}
           title={'Register'}
           onPress={() => {
-            navigation.navigate('HomeStack', {screen: 'Home'});
+            navigation.navigate('HomeStack', {screen: 'Map'});
           }}
         />
       </View>
@@ -44,6 +46,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#60b0f4',
   },
   logoContainer: {
+    marginTop: 25,
     alignItems: 'center',
     flexGrow: 0.2,
     justifyContent: 'center',

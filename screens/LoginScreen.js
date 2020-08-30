@@ -3,10 +3,13 @@ import {StyleSheet, View, Image, Text} from 'react-native';
 import {Input} from '../components/Input';
 import {FilledButton} from '../components/FilledButton';
 import {Error} from '../components/Error';
+import {ScrollView} from 'react-native-gesture-handler';
+import {Header} from '../components/Header';
 
 export function LoginScreen({navigation}) {
   return (
     <View style={styles.container}>
+      <Header />
       <View style={styles.logoContainer}>
         <Image style={styles.logo} source={require('../images/logo2.png')} />
         <Text style={styles.title}>
@@ -53,6 +56,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#60b0f4',
   },
   logoContainer: {
+    marginTop: 20,
     alignItems: 'center',
     flexGrow: 0.2,
     justifyContent: 'center',
@@ -73,8 +77,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#2F9AF4',
   },
   logo: {
-    width: 350,
-    height: 350,
+    width: 250,
+    height: 250,
   },
   title: {
     color: '#FFF',

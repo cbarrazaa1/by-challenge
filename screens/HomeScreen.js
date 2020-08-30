@@ -31,7 +31,7 @@ export function HomeScreen({navigation}) {
   ];
   const {selectedValue, setSelectedValue} = useState('Tables');
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       <View style={styles.headingContainer}>
         <Text style={styles.title}>Measure Items</Text>
       </View>
@@ -67,7 +67,7 @@ export function HomeScreen({navigation}) {
           }}
         />
       </View>
-    </View>
+    </ScrollView>
   );
 }
 
