@@ -1,7 +1,14 @@
 import React from 'react';
 import {createAppContainer} from 'react-navigation';
 import {createBottomTabNavigator} from 'react-navigation-tabs';
-import {StyleSheet, View, ScrollView, TextInput, Icon} from 'react-native';
+import {
+  StyleSheet,
+  View,
+  ScrollView,
+  TextInput,
+  Text,
+  Image,
+} from 'react-native';
 import {Establishment} from '../components/Establishment';
 import {Header} from '../components/Header';
 import {HomeScreen} from './HomeScreen';
@@ -53,6 +60,138 @@ export function EstablishmentScreen() {
               style={styles.textInput}></TextInput>
           </View>
         </View>
+        <ScrollView scrollEventThrottle={16}>
+          <View style={{flex: 1, backgroundColor: 'white', paddingTop: 20}}>
+            <Text
+              style={{
+                fontSize: 24,
+                fontWeight: '700',
+                paddingHorizontal: 20,
+              }}>
+              {' '}
+              Establishments Nearby
+            </Text>
+            <View style={{height: 150, marginTop: 20}}>
+              <ScrollView
+                horizontal={true}
+                showsHorizontalScrollIndicator={false}>
+                <View
+                  style={{
+                    height: 150,
+                    width: 150,
+                    marginLeft: 20,
+                    borderWidth: 0.5,
+                    borderColor: '#dddddd',
+                  }}>
+                  <View style={{flex: 5}}>
+                    <Image
+                      source={require('../images/auditorio.jpg')}
+                      style={{
+                        flex: 1,
+                        width: null,
+                        height: null,
+                        resizeMode: 'cover',
+                      }}></Image>
+                  </View>
+                  <View style={{flex: 1, paddingLeft: 10, paddingTop: 10}}>
+                    <Text>Auditorio San Pedro</Text>
+                  </View>
+                </View>
+                <View
+                  style={{
+                    height: 150,
+                    width: 150,
+                    marginLeft: 20,
+                    borderWidth: 0.5,
+                    borderColor: '#dddddd',
+                  }}>
+                  <View style={{flex: 5}}>
+                    <Image
+                      source={require('../images/crowne.jpg')}
+                      style={{
+                        flex: 1,
+                        width: null,
+                        height: null,
+                        resizeMode: 'cover',
+                      }}></Image>
+                  </View>
+                  <View style={{flex: 1, paddingLeft: 10, paddingTop: 10}}>
+                    <Text>Crowne Plaza</Text>
+                  </View>
+                </View>
+                <View
+                  style={{
+                    height: 150,
+                    width: 150,
+                    marginLeft: 20,
+                    borderWidth: 0.5,
+                    borderColor: '#dddddd',
+                  }}>
+                  <View style={{flex: 5}}>
+                    <Image
+                      source={require('../images/cinepolis.jpg')}
+                      style={{
+                        flex: 1,
+                        width: null,
+                        height: null,
+                        resizeMode: 'cover',
+                      }}></Image>
+                  </View>
+                  <View style={{flex: 1, paddingLeft: 10, paddingTop: 10}}>
+                    <Text>Cinepolis</Text>
+                  </View>
+                </View>
+                <View
+                  style={{
+                    height: 150,
+                    width: 150,
+                    marginLeft: 20,
+                    borderWidth: 0.5,
+                    borderColor: '#dddddd',
+                  }}>
+                  <View style={{flex: 5}}>
+                    <Image
+                      source={require('../images/fundidora.jpg')}
+                      style={{
+                        flex: 1,
+                        width: null,
+                        height: null,
+                        resizeMode: 'cover',
+                      }}></Image>
+                  </View>
+                  <View style={{flex: 1, paddingLeft: 10, paddingTop: 10}}>
+                    <Text>Parque Fundidora</Text>
+                  </View>
+                </View>
+                <View
+                  style={{
+                    height: 150,
+                    width: 150,
+                    marginLeft: 20,
+                    borderWidth: 0.5,
+                    borderColor: '#dddddd',
+                  }}>
+                  <View style={{flex: 5}}>
+                    <Image
+                      source={require('../images/gaucho.jpg')}
+                      style={{
+                        flex: 1,
+                        width: null,
+                        height: null,
+                        resizeMode: 'cover',
+                      }}></Image>
+                  </View>
+                  <View style={{flex: 1, paddingLeft: 10, paddingTop: 10}}>
+                    <Text>Restaurante Gaucho Fundidora</Text>
+                  </View>
+                </View>
+              </ScrollView>
+            </View>
+          </View>
+        </ScrollView>
+        <View style={{marginTop: 40, paddingHorizontal: 20}}>
+          <Text style={{fontSize: 30, fontWeight: '700'}}>Hola</Text>
+        </View>
       </View>
     </SafeAreaView>
   );
@@ -61,6 +200,7 @@ export function EstablishmentScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: 'white',
   },
   containerView: {
     height: 80,
