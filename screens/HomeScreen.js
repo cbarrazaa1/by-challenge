@@ -39,7 +39,7 @@ export function HomeScreen({navigation}) {
   const options = ['Tables', 'Chairs'];
   const [subscription, setSubscription] = useState(null);
   const [tables, setTables] = useState([]);
-  const calibrated = useRef(false);
+  const [calibrated, setCalibrated] = useState(false);
   const positions = useRef([]);
   const velocities = useRef([]);
   const accelerations = useRef([]);
@@ -49,7 +49,7 @@ export function HomeScreen({navigation}) {
     // give 5 seconds to calibrate gravity
     setTimeout(() => {
       console.log('Gravity calibrated.');
-      calibrated.current = true;
+      setCalibrated(true);
     }, 10000);
 
     setUpdateIntervalForType('accelerometer', 200);
@@ -62,7 +62,7 @@ export function HomeScreen({navigation}) {
           z: 0.9 * prevGz + 0.1 * values.z,
         };
 
-        if (!calibrated.current) {
+        if (calibrated) {
           return;
         }
 
@@ -105,9 +105,6 @@ export function HomeScreen({navigation}) {
           accelerations.current.push(accel);
           velocities.current.push(avgVel);
           positions.current.push(pos);
-         // console.log('pos', pos);
-          // console.log('vel', avgVel);
-           //       console.log('accel', accel);
         }
       }),
     );
@@ -160,11 +157,11 @@ export function HomeScreen({navigation}) {
   ];
   const {selectedValue, setSelectedValue} = useState('Tables');
   return (
-    <ScrollView style={styles.container}>
+    <ScrollView style={styles.container} contentContainerStyle={{flex: 1, justifyContent: 'center'}}>
       <View style={styles.headingContainer}>
         <Text style={styles.title}>Measure Items</Text>
       </View>
-      <View style={styles.pickerViewContainer}>
+      {/* <View style={styles.pickerViewContainer}>
         <Text style={styles.pickerLabel}>Item:</Text>
         <Picker
           style={styles.pickerContainer}
@@ -175,22 +172,23 @@ export function HomeScreen({navigation}) {
             return <Picker.Item label={item} value={index} key={index} />;
           })}
         </Picker>
-      </View>
+      </View> */}
       <View style={styles.buttonAddContainer}>
         <FilledButton
           style={styles.buttonAdd}
-          title={'Add Item'}
+          enabled={calibrated}
+          title={!calibrated ? 'Calibrating...' : 'Add Item'}
           onPress={onAddPress}
         />
       </View>
-      <ScrollView
+      {/* <ScrollView
         style={styles.scrollView}
         horizontal={true}
         showsHorizontalScrollIndicator={false}>
         {items.map((item, index) => {
           return <Item name={item.type} measurement={item.measurement} />;
         })}
-      </ScrollView>
+      </ScrollView> */}
       <View style={styles.buttonContainer}>
         <FilledButton
           style={styles.buttonLogin}
@@ -210,10 +208,10 @@ const styles = StyleSheet.create({
   },
   headingContainer: {
     alignItems: 'center',
-    flexGrow: 0.3,
     fontWeight: 'bold',
     fontSize: 40,
     justifyContent: 'center',
+    marginVertical: 20,
   },
   pickerContainer: {
     width: '50%',
@@ -272,9 +270,8 @@ const styles = StyleSheet.create({
   },
   title: {
     color: '#3E95D7',
-    marginTop: 30,
     fontSize: 36,
-    flexGrow: 0.2,
     textAlign: 'center',
+    margin: 0,
   },
 });
