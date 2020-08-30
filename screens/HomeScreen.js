@@ -1,8 +1,10 @@
 import React from 'react';
 import {StyleSheet, View, Image, Text} from 'react-native';
-import {Input} from './Input';
-import {FilledButton} from './FilledButton';
-export function Login() {
+import {Input} from '../components/Input';
+import {FilledButton} from '../components/FilledButton';
+import {Error} from '../components/Error';
+
+export function HomeScreen({navigation}) {
   return (
     <View style={styles.container}>
       <View style={styles.logoContainer}>
@@ -13,6 +15,7 @@ export function Login() {
         </Text>
       </View>
       <View style={styles.inputContainer}>
+        <Error error={''} />
         <Input
           placeholder={'Email'}
           placeholderTextColor="#4B4B4B"
@@ -26,7 +29,13 @@ export function Login() {
       </View>
       <View style={styles.buttonContainer}>
         <FilledButton style={styles.buttonLogin} title={'Login'} />
-        <FilledButton style={styles.buttonLogin} title={'Register'} />
+        <FilledButton
+          style={styles.buttonLogin}
+          title={'Register'}
+          onPress={() => {
+            navigation.navigate('Register');
+          }}
+        />
       </View>
     </View>
   );

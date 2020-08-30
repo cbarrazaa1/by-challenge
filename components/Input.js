@@ -3,7 +3,7 @@ import {StyleSheet} from 'react-native';
 import {TextInput} from 'react-native-gesture-handler';
 
 export function Input({style, ...props}) {
-  return <TextInput {...props} style={[style, styles.input]} />;
+  return <TextInput {...props} style={[styles.input, style]} />;
 }
 
 const styles = StyleSheet.create({
