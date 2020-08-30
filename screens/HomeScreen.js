@@ -1,12 +1,141 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 import {StyleSheet, View, Text, Picker, ScrollView} from 'react-native';
 import {Input} from '../components/Input';
 import {FilledButton} from '../components/FilledButton';
 import {Error} from '../components/Error';
 import {Item} from '../components/Item';
+import {accelerometer, setUpdateIntervalForType} from 'react-native-sensors';
+
+function computeVelocity(vel, accel, t0, t1) {
+  return {
+    x: vel.x + accel.x * (t1 - t0),
+    y: vel.y + accel.y * (t1 - t0),
+    z: vel.z + accel.z * (t1 - t0),
+  };
+}
+
+function computeAverageVelocity(prevVel, vel) {
+  return {
+    x: (prevVel.x + vel.x) / 2,
+    y: (prevVel.y + vel.y) / 2,
+    z: (prevVel.z + vel.z) / 2,
+  };
+}
+
+function computePosition(pos, vel, t0, t1) {
+  return {
+    x: pos.x + vel.x * (t1 - t0),
+    y: pos.y + vel.y * (t1 - t0),
+    z: pos.z + vel.z * (t1 - t0),
+  };
+}
+
+const ZERO_VECTOR = {x: 0, y: 0, z: 0};
+function zeroVector() {
+  return {...ZERO_VECTOR};
+}
 
 export function HomeScreen({navigation}) {
   const options = ['Tables', 'Chairs'];
+  const [subscription, setSubscription] = useState(null);
+  const [tables, setTables] = useState([]);
+  const calibrated = useRef(false);
+  const positions = useRef([]);
+  const velocities = useRef([]);
+  const accelerations = useRef([]);
+  const gravity = useRef(zeroVector());
+
+  useEffect(() => {
+    // give 5 seconds to calibrate gravity
+    setTimeout(() => {
+      console.log('Gravity calibrated.');
+      calibrated.current = true;
+    }, 10000);
+
+    setUpdateIntervalForType('accelerometer', 200);
+    setSubscription(
+      accelerometer.subscribe((values) => {
+        const {x: prevGx, y: prevGy, z: prevGz} = gravity.current;
+        gravity.current = {
+          x: 0.9 * prevGx + 0.1 * values.x,
+          y: 0.9 * prevGy + 0.1 * values.y,
+          z: 0.9 * prevGz + 0.1 * values.z,
+        };
+
+        if (!calibrated.current) {
+          return;
+        }
+
+        const accel = {
+          x: (values.x - gravity.current.x) / 9.81,
+          y: (values.y - gravity.current.y) / 9.81,
+          z: (values.z - gravity.current.z) / 9.81,
+        };
+        const THRESHOLD = 0.01;
+        let isZero = false;
+
+        if (
+          Math.abs(accel.x) <= THRESHOLD ||
+          Math.abs(accel.y) <= THRESHOLD ||
+          Math.abs(accel.z) <= THRESHOLD
+        ) {
+          isZero = true;
+        }
+
+        if (accelerations.current.length === 0 || isZero) {
+          accelerations.current.push(zeroVector());
+          velocities.current.push(zeroVector());
+          positions.current.push(zeroVector());
+        } else {
+          const t = accelerations.current.length;
+          const vel = computeVelocity(
+            velocities.current[t - 1],
+            accel,
+            t - 1,
+            t,
+          );
+          const avgVel = computeAverageVelocity(velocities.current[t - 1], vel);
+          const pos = computePosition(
+            positions.current[t - 1],
+            avgVel,
+            t - 1,
+            t,
+          );
+
+          accelerations.current.push(accel);
+          velocities.current.push(avgVel);
+          positions.current.push(pos);
+         // console.log('pos', pos);
+          // console.log('vel', avgVel);
+           //       console.log('accel', accel);
+        }
+      }),
+    );
+
+    return () => subscription.unsubscribe();
+  }, []);
+
+  const onAddPress = () => {
+    if (tables.length === 0) {
+      setTables((prev) =>
+        prev.concat({x: 0, y: 0, time: positions.current.length - 1}),
+      );
+    } else {
+      const last = tables[tables.length - 1];
+      let {x: totalX, y: totalY, time} = last;
+      [totalX, totalY] = [0, 0];
+      for (let i = time; i < positions.current.length; i++) {
+        totalX += positions.current[i].x;
+        totalY += positions.current[i].y;
+      }
+
+      console.log('table', totalX, totalY);
+      setTables((prev) =>
+        prev.concat({x: totalX * 25, y: totalY * 25, time: positions.current.length - 1}),
+      );
+    }
+  };
+
   const items = [
     {
       type: 'Table',
@@ -48,7 +177,11 @@ export function HomeScreen({navigation}) {
         </Picker>
       </View>
       <View style={styles.buttonAddContainer}>
-        <FilledButton style={styles.buttonAdd} title={'Add Item'} />
+        <FilledButton
+          style={styles.buttonAdd}
+          title={'Add Item'}
+          onPress={onAddPress}
+        />
       </View>
       <ScrollView
         style={styles.scrollView}
@@ -63,7 +196,7 @@ export function HomeScreen({navigation}) {
           style={styles.buttonLogin}
           title={'Render'}
           onPress={() => {
-            navigation.navigate('Map');
+            navigation.navigate('Map', {tables});
           }}
         />
       </View>
