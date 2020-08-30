@@ -2,6 +2,7 @@ import React from 'react';
 import {HomeScreen} from '../screens/HomeScreen';
 import MapScreen from '../screens/MapScreen';
 import {EstablishmentScreen} from '../screens/EstablishmentScreen';
+import {RoomScreen} from '../screens/RoomScreen';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
@@ -35,7 +36,7 @@ export default function HomeStackNavigator() {
       />
       <HomeStack.Screen
         name={'Rooms'}
-        component={HomeScreen}
+        component={RoomScreen}
         options={{
           tabBarLabel: 'Room',
           tabBarIcon: ({color, size}) => (

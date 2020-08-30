@@ -1,7 +1,4 @@
 import React from 'react';
-import {createAppContainer} from 'react-navigation';
-import {createBottomTabNavigator} from 'react-navigation-tabs';
-
 import {
   StyleSheet,
   View,
@@ -11,42 +8,12 @@ import {
   Image,
   Dimensions,
 } from 'react-native';
-import {Establishment} from '../components/Establishment';
-import {Header} from '../components/Header';
-import {HomeScreen} from './HomeScreen';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
 const {height, width} = Dimensions.get('window');
 
-export function EstablishmentScreen() {
-  const places = [
-    {
-      room_id: '1001',
-      name: 'Auditorio San Pedro',
-      imgUrl: require('../images/auditorio.jpg'),
-    },
-    {
-      room_id: '1001',
-      name: 'Crowne Plaza',
-      imgUrl: require('../images/crowne.jpg'),
-    },
-    {
-      room_id: '1001',
-      name: 'Cinepolis Valle Soleado',
-      imgUrl: require('../images/cinepolis.jpg'),
-    },
-    {
-      room_id: '1001',
-      name: 'Parque Fundidora',
-      imgUrl: require('../images/fundidora.jpg'),
-    },
-    {
-      room_id: '1001',
-      name: 'Restaurante Gaucho',
-      imgUrl: require('../images/gaucho.jpg'),
-    },
-  ];
+export function RoomScreen() {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.container}>
@@ -58,7 +25,7 @@ export function EstablishmentScreen() {
               style={{marginRight: 10}}
             />
             <TextInput
-              placeholder="Search Establishment"
+              placeholder="Search Rooms"
               placeholderTextColor="grey"
               underlineColorAndroid="transparent"
               style={styles.textInput}></TextInput>
@@ -73,9 +40,9 @@ export function EstablishmentScreen() {
                 paddingHorizontal: 20,
               }}>
               {' '}
-              Establishments Nearby
+              My Saved Rooms
             </Text>
-            <View style={{height: 150, marginTop: 20}}>
+            <View style={{height: 200, marginTop: 20}}>
               <ScrollView
                 horizontal={true}
                 showsHorizontalScrollIndicator={false}>
@@ -89,7 +56,7 @@ export function EstablishmentScreen() {
                   }}>
                   <View style={{flex: 5}}>
                     <Image
-                      source={require('../images/auditorio.jpg')}
+                      source={require('../images/room1.jpg')}
                       style={{
                         flex: 1,
                         width: null,
@@ -97,8 +64,14 @@ export function EstablishmentScreen() {
                         resizeMode: 'cover',
                       }}></Image>
                   </View>
-                  <View style={{flex: 1, paddingLeft: 10, paddingTop: 10}}>
-                    <Text>Auditorio San Pedro</Text>
+                  <View
+                    style={{
+                      flex: 1,
+                      paddingLeft: 10,
+                      paddingTop: 10,
+                      backgroundColor: 'rgba(0, 204, 0, 0.6)',
+                    }}>
+                    <Text>Cupo: 30</Text>
                   </View>
                 </View>
                 <View
@@ -111,7 +84,7 @@ export function EstablishmentScreen() {
                   }}>
                   <View style={{flex: 5}}>
                     <Image
-                      source={require('../images/crowne.jpg')}
+                      source={require('../images/room2.jpg')}
                       style={{
                         flex: 1,
                         width: null,
@@ -119,8 +92,14 @@ export function EstablishmentScreen() {
                         resizeMode: 'cover',
                       }}></Image>
                   </View>
-                  <View style={{flex: 1, paddingLeft: 10, paddingTop: 10}}>
-                    <Text>Crowne Plaza</Text>
+                  <View
+                    style={{
+                      flex: 1,
+                      paddingLeft: 10,
+                      paddingTop: 10,
+                      backgroundColor: 'rgba(0, 204, 0, 0.6)',
+                    }}>
+                    <Text>Cupo: 20</Text>
                   </View>
                 </View>
                 <View
@@ -133,7 +112,7 @@ export function EstablishmentScreen() {
                   }}>
                   <View style={{flex: 5}}>
                     <Image
-                      source={require('../images/cinepolis.jpg')}
+                      source={require('../images/room3.jpg')}
                       style={{
                         flex: 1,
                         width: null,
@@ -141,8 +120,14 @@ export function EstablishmentScreen() {
                         resizeMode: 'cover',
                       }}></Image>
                   </View>
-                  <View style={{flex: 1, paddingLeft: 10, paddingTop: 10}}>
-                    <Text>Cinepolis</Text>
+                  <View
+                    style={{
+                      flex: 1,
+                      paddingLeft: 10,
+                      paddingTop: 10,
+                      backgroundColor: 'rgba(0, 204, 0, 0.6)',
+                    }}>
+                    <Text>Cupo: 20</Text>
                   </View>
                 </View>
                 <View
@@ -155,7 +140,7 @@ export function EstablishmentScreen() {
                   }}>
                   <View style={{flex: 5}}>
                     <Image
-                      source={require('../images/fundidora.jpg')}
+                      source={require('../images/room4.jpg')}
                       style={{
                         flex: 1,
                         width: null,
@@ -163,8 +148,14 @@ export function EstablishmentScreen() {
                         resizeMode: 'cover',
                       }}></Image>
                   </View>
-                  <View style={{flex: 1, paddingLeft: 10, paddingTop: 10}}>
-                    <Text>Parque Fundidora</Text>
+                  <View
+                    style={{
+                      flex: 1,
+                      paddingLeft: 10,
+                      paddingTop: 10,
+                      backgroundColor: 'rgba(0, 204, 0, 0.6)',
+                    }}>
+                    <Text>Cupo: 100</Text>
                   </View>
                 </View>
                 <View
@@ -177,7 +168,7 @@ export function EstablishmentScreen() {
                   }}>
                   <View style={{flex: 5}}>
                     <Image
-                      source={require('../images/gaucho.jpg')}
+                      source={require('../images/room5.jpg')}
                       style={{
                         flex: 1,
                         width: null,
@@ -185,8 +176,14 @@ export function EstablishmentScreen() {
                         resizeMode: 'cover',
                       }}></Image>
                   </View>
-                  <View style={{flex: 1, paddingLeft: 10, paddingTop: 10}}>
-                    <Text>Restaurante Gaucho Fundidora</Text>
+                  <View
+                    style={{
+                      flex: 1,
+                      paddingLeft: 10,
+                      paddingTop: 10,
+                      backgroundColor: 'rgba(204, 0, 0, 0.6)',
+                    }}>
+                    <Text>Cupo: 40</Text>
                   </View>
                 </View>
               </ScrollView>
@@ -197,17 +194,13 @@ export function EstablishmentScreen() {
               marginTop: 40,
               paddingHorizontal: 20,
             }}>
-            <Text style={{fontSize: 30, fontWeight: '700'}}>
-              {' '}
-              Popular Establishments
-            </Text>
-            <Text style={{fontWeight: '300', marginTop: 10}}>
-              These are some of the popular establishments nearby that follow
-              COVID-19 regulations.
+            <Text style={{fontSize: 30, fontWeight: '700'}}> Verify Rooms</Text>
+            <Text style={{fontSize: 15, fontWeight: '300', marginTop: 10}}>
+              These next rooms do not follow the COVID-19 regulations.
             </Text>
             <View style={{width: width - 40, height: 200, marginTop: 20}}>
               <Image
-                source={require('../images/gaucho.jpg')}
+                source={require('../images/room5.jpg')}
                 style={{
                   flex: 1,
                   width: null,
@@ -217,6 +210,15 @@ export function EstablishmentScreen() {
                   borderWidth: 1,
                   borderColor: '#dddddd',
                 }}></Image>
+
+              <Text
+                style={{
+                  fontSize: 20,
+                  fontWeight: '300',
+                  marginTop: 10,
+                }}>
+                Please follow the COVID-19 guidelines.
+              </Text>
             </View>
           </View>
         </ScrollView>

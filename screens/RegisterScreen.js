@@ -31,7 +31,7 @@ export function RegisterScreen({navigation}) {
           style={styles.buttonLogin}
           title={'Register'}
           onPress={() => {
-            navigation.navigate('HomeStack', {screen: 'Map'});
+            navigation.navigate('HomeStack', {screen: 'Establishment'});
           }}
         />
       </View>
