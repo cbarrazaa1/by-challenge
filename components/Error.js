@@ -11,7 +11,7 @@ export function Error({error}) {
 
 const styles = StyleSheet.create({
   container: {
-    paddingVertical: 8,
+    paddingVertical: 0,
   },
   text: {
     color: 'red',

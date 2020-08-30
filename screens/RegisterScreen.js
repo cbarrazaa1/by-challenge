@@ -13,7 +13,6 @@ export function RegisterScreen({navigation}) {
         <Image style={styles.logo} source={require('../images/logo2.png')} />
       </View>
       <View style={styles.inputContainer}>
-        <Error error={''} />
         <Input placeholder={'First Name'} placeholderTextColor="#4B4B4B" />
         <Input placeholder={'Last Name'} placeholderTextColor="#4B4B4B" />
         <Input
@@ -48,7 +47,7 @@ const styles = StyleSheet.create({
   logoContainer: {
     marginTop: 25,
     alignItems: 'center',
-    flexGrow: 0.2,
+    flexGrow: 0.1,
     justifyContent: 'center',
   },
   inputContainer: {
@@ -74,7 +73,7 @@ const styles = StyleSheet.create({
     color: '#FFF',
     marginTop: 10,
     fontSize: 40,
-    flexGrow: 0.2,
+    flexGrow: 0.1,
     textAlign: 'center',
     opacity: 0.9,
   },
