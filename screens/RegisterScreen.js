@@ -26,7 +26,13 @@ export function RegisterScreen() {
         />
       </View>
       <View style={styles.buttonContainer}>
-        <FilledButton style={styles.buttonLogin} title={'Register'} />
+        <FilledButton
+          style={styles.buttonLogin}
+          title={'Register'}
+          onPress={() => {
+            navigation.navigate('HomeStack', {screen: 'Home'});
+          }}
+        />
       </View>
     </View>
   );

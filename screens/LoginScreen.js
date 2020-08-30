@@ -28,7 +28,13 @@ export function LoginScreen({navigation}) {
         />
       </View>
       <View style={styles.buttonContainer}>
-        <FilledButton style={styles.buttonLogin} title={'Login'} />
+        <FilledButton
+          style={styles.buttonLogin}
+          title={'Login'}
+          onPress={() => {
+            navigation.navigate('HomeStack');
+          }}
+        />
         <FilledButton
           style={styles.buttonLogin}
           title={'Register'}

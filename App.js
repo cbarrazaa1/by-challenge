@@ -16,6 +16,7 @@ function App() {
           headerShown: false,
         }}>
         <Stack.Screen name={'AuthStack'} component={AuthStackNavigator} />
+        <Stack.Screen name={'HomeStack'} component={HomeStackNavigator} />
       </Stack.Navigator>
     </NavigationContainer>
   );
