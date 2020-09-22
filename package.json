@@ -13,7 +13,7 @@
     "@react-native-community/masked-view": "^0.1.10",
     "@react-navigation/bottom-tabs": "^5.8.0",
     "@react-navigation/native": "^5.7.3",
-    "expo-constants": "^9.1.1",
+    "expo-constants": "^9.2.0",
     "expo-gl-cpp": "^8.4.0",
     "gl-react": "^4.0.1",
     "gl-react-native": "^4.0.1",
